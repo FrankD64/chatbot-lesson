@@ -142,14 +142,11 @@
 
     function showHelp(text, anchor) {
       help.innerHTML = "";
-      help.appendChild(el("strong", null, "What this means: "));
-      help.appendChild(document.createTextNode(text + " "));
-      if (anchor) {
-        const a = el("button", "help-link", "Open it in the Error Decoder");
-        a.type = "button";
-        a.addEventListener("click", function () { openReference("decoder", anchor); });
-        help.appendChild(a);
-      }
+      // Only point to the Error Decoder; it explains the error.
+      const a = el("button", "help-link", "Open it in the Error Decoder");
+      a.type = "button";
+      a.addEventListener("click", function () { openReference("decoder", anchor); });
+      help.appendChild(a);
       help.hidden = false;
     }
 
