@@ -342,7 +342,27 @@
     const body = panel.querySelector(".ref-body");
     refReady = fetch("assets/reference.html")
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
-      .then(function (html) { body.innerHTML = html; setTab("decoder"); })
+      .then(function (html) {
+        body.innerHTML = html;
+        // Swap in a published Google Doc where one has been linked
+        body.querySelectorAll("[data-doc-src]").forEach(function (p) {
+          let src = (p.dataset.docSrc || "").trim();
+          if (!src) return;
+          src = src.replace(/\/(edit|pub)[^/]*$/, "/pub");
+          const embed = src + (src.indexOf("?") === -1 ? "?" : "&") + "embedded=true";
+          p.innerHTML = "";
+          p.style.flexDirection = "column";
+          const f = document.createElement("iframe");
+          f.src = embed;
+          f.title = (p.id === "ref-words" ? "Key Words" : "Error Decoder") + " document";
+          p.appendChild(f);
+          const a = el("a", "ref-open-doc", "Open this sheet in a new tab");
+          a.href = src; a.target = "_blank"; a.rel = "noopener";
+          p.appendChild(a);
+          body.classList.add("has-doc");
+        });
+        setTab("decoder");
+      })
       .catch(function () { body.innerHTML = "<p>This panel couldn’t load. Refresh the page to try again.</p>"; });
     panel.querySelectorAll(".ref-tabs [role=tab]").forEach(function (t) {
       t.addEventListener("click", function () { setTab(t.id.replace("tab-", "")); });

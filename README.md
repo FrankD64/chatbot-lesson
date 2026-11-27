@@ -26,6 +26,14 @@ Python runs inside the learner's browser (Pyodide), so there is nothing to insta
 
 After you edit a deck in Google Slides, the website shows the change automatically. Re-download it as a `.pptx` and replace the file in `assets/slides/` if you want the download to match.
 
+## Showing your own Error Decoder and Key Words sheets
+
+1. Upload `Error_Decoder.docx` and `Key_Words.docx` to Google Drive and open each with Google Docs.
+2. In each doc, choose **File > Share > Publish to web**, then click **Publish**, and copy the link.
+3. In `assets/reference.html`, paste each link between the quotes after `data-doc-src` on the matching panel (`ref-decoder` or `ref-words`), then commit.
+
+The sidebar then shows your Google Docs, and any edits you make there appear on the site automatically. Until a link is added, the sidebar shows the built-in version.
+
 ## Adding the intro video
 
 1. Upload the video to YouTube (Unlisted is fine) and add corrected captions.
