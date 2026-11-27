@@ -288,9 +288,18 @@
     f.src = src;
     f.title = box.dataset.title || "Slides";
     f.allowFullscreen = true;
+    f.setAttribute("allow", "fullscreen");
     box.appendChild(f);
     const links = box.nextElementSibling;
     if (links && links.classList.contains("slides-links")) {
+      if (box.requestFullscreen || box.webkitRequestFullscreen) {
+        const fs = el("button", "btn secondary", "Full screen");
+        fs.type = "button";
+        fs.addEventListener("click", function () {
+          (box.requestFullscreen || box.webkitRequestFullscreen).call(box);
+        });
+        links.insertBefore(fs, links.firstChild);
+      }
       const a = el("a", null, "Open the slides in a new tab");
       a.href = src; a.target = "_blank"; a.rel = "noopener";
       links.insertBefore(a, links.firstChild);
