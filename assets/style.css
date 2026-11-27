@@ -2,17 +2,17 @@
 :root {
   --bg: #FFFFFF;
   --alt: #F4F4F2;
-  --ink: #1F2328;
-  --muted: #4B5058;
+  --ink: #111418;
+  --muted: #33373D;
   --line: #D6D6D2;
   --rule: #85857F;  /* section dividers */
-  --accent: #0B5CAD;
+  --accent: #084B8F;
   --accent-soft: #EEF4FB;
-  --ok: #1B6E3C;
+  --ok: #155A31;
   --ok-soft: #EAF6EE;
-  --bad: #A4161A;
+  --bad: #8E1216;
   --bad-soft: #FCECEC;
-  --warn: #8A4B00;
+  --warn: #6E3C00;
   --warn-soft: #FFF4E0;
   --term-bg: #16191F;
   --term-bar: #20242C;
@@ -83,7 +83,7 @@ p code, li code, dd code { background: var(--accent-soft); padding: 0 4px; }
 
 /* ---------- Buttons: square ---------- */
 .btn { font: inherit; font-size: 1rem; font-weight: 700; border-radius: 0; padding: 11px 20px; border: 2px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
-.btn:hover { background: #094C90; border-color: #094C90; }
+.btn:hover { background: #063A6E; border-color: #063A6E; }
 .btn.secondary { background: var(--bg); color: var(--accent); }
 .btn.secondary:hover { background: var(--accent-soft); }
 .btn:disabled { opacity: .55; cursor: not-allowed; }
