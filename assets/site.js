@@ -145,8 +145,9 @@
       help.appendChild(el("strong", null, "What this means: "));
       help.appendChild(document.createTextNode(text + " "));
       if (anchor) {
-        const a = el("a", null, "See the Error Decoder");
-        a.href = "decoder.html#" + anchor;
+        const a = el("button", "help-link", "Open it in the Error Decoder");
+        a.type = "button";
+        a.addEventListener("click", function () { openReference("decoder", anchor); });
         help.appendChild(a);
       }
       help.hidden = false;
@@ -277,64 +278,88 @@
     });
   }
 
-  /* ---------------- Slide decks ---------------- */
-  function setupDeck(deck) {
-    const slides = Array.from(deck.querySelectorAll(".slide"));
-    const viewport = deck.querySelector(".deck-viewport");
-    const name = deck.dataset.title || "Slides";
-    let i = 0;
-
-    deck.setAttribute("role", "region");
-    deck.setAttribute("aria-roledescription", "slide deck");
-    deck.setAttribute("aria-label", name);
-    viewport.tabIndex = 0;
-    slides.forEach(function (s, n) {
-      s.setAttribute("role", "group");
-      s.setAttribute("aria-roledescription", "slide");
-      s.setAttribute("aria-label", (n + 1) + " of " + slides.length);
-    });
-
-    const controls = el("div", "deck-controls");
-    const nav = el("div", "btn-row deck-nav");
-    nav.style.marginTop = "0";
-    const prev = el("button", "btn secondary", "← Back");
-    prev.type = "button";
-    const next = el("button", "btn", "Next →");
-    next.type = "button";
-    nav.append(prev, next);
-    const count = el("span", "deck-count");
-    count.setAttribute("aria-live", "polite");
-    const dots = el("div", "deck-dots");
-    dots.setAttribute("aria-hidden", "true");
-    slides.forEach(function () { dots.appendChild(el("span")); });
-    const all = el("button", "btn secondary", "Show all slides");
-    all.type = "button";
-    all.setAttribute("aria-pressed", "false");
-    controls.append(nav, count, dots, all);
-    deck.appendChild(controls);
-
-    function show(n) {
-      i = Math.max(0, Math.min(slides.length - 1, n));
-      slides.forEach(function (s, k) { s.hidden = k !== i; });
-      Array.from(dots.children).forEach(function (d, k) { d.classList.toggle("on", k === i); });
-      count.textContent = "Slide " + (i + 1) + " of " + slides.length;
-      prev.disabled = i === 0;
-      next.disabled = i === slides.length - 1;
+  /* ---------------- Embedded slides (Google Slides "Publish to web") ---------------- */
+  function setupSlides(box) {
+    let src = (box.dataset.src || "").trim();
+    if (!src) return; // keep the placeholder until a published link is added
+    src = src.replace(/\/pub(\?|$)/, "/embed$1").replace(/\/edit.*$/, "/embed");
+    box.innerHTML = "";
+    const f = document.createElement("iframe");
+    f.src = src;
+    f.title = box.dataset.title || "Slides";
+    f.allowFullscreen = true;
+    box.appendChild(f);
+    const links = box.nextElementSibling;
+    if (links && links.classList.contains("slides-links")) {
+      const a = el("a", null, "Open the slides in a new tab");
+      a.href = src; a.target = "_blank"; a.rel = "noopener";
+      links.insertBefore(a, links.firstChild);
     }
-    prev.addEventListener("click", function () { show(i - 1); });
-    next.addEventListener("click", function () { show(i + 1); });
-    viewport.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowRight") { e.preventDefault(); show(i + 1); }
-      if (e.key === "ArrowLeft") { e.preventDefault(); show(i - 1); }
+  }
+
+  /* ---------------- Reference sidebar: Error Decoder + Key Words ---------------- */
+  let refReady = Promise.resolve();
+  const mobile = window.matchMedia("(max-width: 1099px)");
+
+  function setTab(name) {
+    document.querySelectorAll(".ref-tabs [role=tab]").forEach(function (t) {
+      const on = t.id === "tab-" + name;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
     });
-    all.addEventListener("click", function () {
-      const on = deck.classList.toggle("all-slides");
-      all.setAttribute("aria-pressed", String(on));
-      all.textContent = on ? "Show one slide at a time" : "Show all slides";
-      count.textContent = on ? "Showing all " + slides.length + " slides" : "";
-      if (!on) show(i);
+    ["decoder", "words"].forEach(function (n) {
+      const p = document.getElementById("ref-" + n);
+      if (p) p.hidden = n !== name;
     });
-    show(0);
+  }
+  function setOpen(open) {
+    const panel = document.getElementById("ref-panel");
+    const toggle = document.querySelector(".ref-toggle");
+    const scrim = document.querySelector(".ref-scrim");
+    if (!panel) return;
+    panel.classList.toggle("open", open);
+    if (scrim) scrim.classList.toggle("open", open);
+    if (toggle) toggle.setAttribute("aria-expanded", String(open));
+    if (open) { const sel = panel.querySelector("[aria-selected=true]"); if (sel) sel.focus(); }
+    else if (toggle && mobile.matches) toggle.focus();
+  }
+  function openReference(tab, anchor) {
+    refReady.then(function () {
+      setTab(tab);
+      if (mobile.matches) setOpen(true);
+      const body = document.querySelector(".ref-body");
+      const item = anchor && document.getElementById("ref-" + anchor);
+      if (body && item) {
+        body.scrollTop = item.offsetTop - body.offsetTop - 8;
+        item.classList.add("flash");
+        setTimeout(function () { item.classList.remove("flash"); }, 1800);
+      }
+    });
+  }
+  window.openReference = openReference;
+
+  function setupReference(panel) {
+    const body = panel.querySelector(".ref-body");
+    refReady = fetch("assets/reference.html")
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function (html) { body.innerHTML = html; setTab("decoder"); })
+      .catch(function () { body.innerHTML = "<p>This panel couldn’t load. Refresh the page to try again.</p>"; });
+    panel.querySelectorAll(".ref-tabs [role=tab]").forEach(function (t) {
+      t.addEventListener("click", function () { setTab(t.id.replace("tab-", "")); });
+      t.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+          const other = panel.querySelector(".ref-tabs [role=tab]:not(#" + t.id + ")");
+          other.focus(); setTab(other.id.replace("tab-", ""));
+        }
+      });
+    });
+    const toggle = document.querySelector(".ref-toggle");
+    if (toggle) toggle.addEventListener("click", function () { setOpen(!panel.classList.contains("open")); });
+    const close = panel.querySelector(".ref-close");
+    if (close) close.addEventListener("click", function () { setOpen(false); });
+    const scrim = document.querySelector(".ref-scrim");
+    if (scrim) scrim.addEventListener("click", function () { setOpen(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && panel.classList.contains("open")) setOpen(false); });
   }
 
   /* ---------------- Intro video ---------------- */
@@ -352,7 +377,9 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".terminal").forEach(setupTerminal);
-    document.querySelectorAll(".deck").forEach(setupDeck);
+    document.querySelectorAll(".slides-embed").forEach(setupSlides);
+    const ref = document.getElementById("ref-panel");
+    if (ref) setupReference(ref);
     document.querySelectorAll(".video-frame").forEach(setupVideo);
     // Start loading Python in the background on lesson pages, so Run is quick.
     if (document.querySelector(".terminal")) setTimeout(function () { loadPython().catch(function () {}); }, 800);

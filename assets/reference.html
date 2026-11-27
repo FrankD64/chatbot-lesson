@@ -1,0 +1,100 @@
+<!-- Sidebar content for both lessons. Edit this one file to change the Error Decoder or Key Words. -->
+<div role="tabpanel" id="ref-decoder" aria-labelledby="tab-decoder" tabindex="0">
+  <p class="ref-intro">Find the error message you got. Each one says what it means and how to fix it.</p>
+
+  <section class="ref-item" id="ref-quote">
+    <h3>A quote is missing</h3>
+    <p class="ref-msg">SyntaxError: unterminated string literal</p>
+    <p>Your text has a quote at the start but not at the end (or the other way around). Put a quote on both sides.</p>
+    <p class="ref-code bad">print("Hello)</p>
+    <p class="ref-code good">print("Hello")</p>
+  </section>
+
+  <section class="ref-item" id="ref-bracket">
+    <h3>A bracket is missing or extra</h3>
+    <p class="ref-msg">SyntaxError: '(' was never closed</p>
+    <p class="ref-msg">SyntaxError: unmatched ')'</p>
+    <p>Every <code>(</code> needs exactly one <code>)</code>. Count them, then add or delete one.</p>
+    <p class="ref-code bad">print("I like pizza"</p>
+    <p class="ref-code good">print("I like pizza")</p>
+  </section>
+
+  <section class="ref-item" id="ref-capital">
+    <h3>A capital letter in print or input</h3>
+    <p class="ref-msg">NameError: name 'Print' is not defined. Did you mean: 'print'?</p>
+    <p>Python treats <code>Print</code> and <code>print</code> as different words. Use small letters.</p>
+    <p class="ref-code bad">Print("Coding is fun!")</p>
+    <p class="ref-code good">print("Coding is fun!")</p>
+  </section>
+
+  <section class="ref-item" id="ref-name">
+    <h3>Python doesn’t know a word</h3>
+    <p class="ref-msg">NameError: name 'Hello' is not defined</p>
+    <p>Usually one of these:</p>
+    <ul>
+      <li>Text is missing its quotes, so Python reads it as an instruction.</li>
+      <li>A variable is spelled differently from when you made it (<code>nme</code> instead of <code>name</code>).</li>
+      <li>A variable is used before the line that makes it.</li>
+    </ul>
+    <p class="ref-code bad">print(Hello)</p>
+    <p class="ref-code good">print("Hello")</p>
+  </section>
+
+  <section class="ref-item" id="ref-curly">
+    <h3>Curly quotes</h3>
+    <p class="ref-msg">SyntaxError: invalid character '“' (U+201C)</p>
+    <p>Python only reads straight quotes (<code>"</code>). Curly quotes usually come from copying code out of a document. Retype them with the quote key, or use the “Fix them for me” button in the Python box.</p>
+  </section>
+
+  <section class="ref-item" id="ref-syntax">
+    <h3>Something is out of place</h3>
+    <p class="ref-msg">SyntaxError: invalid syntax. Perhaps you forgot a comma?</p>
+    <p>Python can’t tell how the line fits together. Often a <code>+</code> is missing between two pieces you’re joining.</p>
+    <p class="ref-code bad">print("Hi " name)</p>
+    <p class="ref-code good">print("Hi " + name)</p>
+  </section>
+
+  <section class="ref-item" id="ref-join">
+    <h3>Joining text with a number</h3>
+    <p class="ref-msg">TypeError: can only concatenate str (not "int") to str</p>
+    <p>You used <code>+</code> to join text with a number that isn’t in quotes. Put the number inside the quotes.</p>
+    <p class="ref-code bad">print("I am " + 12)</p>
+    <p class="ref-code good">print("I am 12")</p>
+  </section>
+
+  <section class="ref-item" id="ref-indent">
+    <h3>An extra space at the start</h3>
+    <p class="ref-msg">IndentationError: unexpected indent</p>
+    <p>There are spaces before the code on that line. Delete them so the line starts at the left edge.</p>
+  </section>
+
+  <section class="ref-item" id="ref-wrong-output">
+    <h3>No error, but the output looks wrong</h3>
+    <p><strong>Output says HiSam:</strong> add a space inside the quotes.</p>
+    <p class="ref-code bad">print("Hi" + name)</p>
+    <p class="ref-code good">print("Hi " + name)</p>
+    <p><strong>Output says name instead of the answer:</strong> take the quotes off the variable.</p>
+    <p class="ref-code bad">print("name")</p>
+    <p class="ref-code good">print(name)</p>
+  </section>
+</div>
+
+<div role="tabpanel" id="ref-words" aria-labelledby="tab-words" tabindex="0" hidden>
+  <p class="ref-intro">Every coding word used in these lessons, with an example.</p>
+  <dl class="ref-words">
+    <dt>Code</dt><dd>Instructions written for a computer. It follows them in order, exactly as written.</dd>
+    <dt>Python</dt><dd>A language for writing code, used for games, websites, science and more.</dd>
+    <dt>Run</dt><dd>Tell the computer to follow your code. Press <strong>▶ Run</strong>.</dd>
+    <dt>Output</dt><dd>What your program shows on the screen.</dd>
+    <dt>print()</dt><dd>Shows a message on the screen.<span class="ref-code">print("Hello, world!")</span></dd>
+    <dt>String</dt><dd>Text inside quotes. The quotes show where the text starts and ends.<span class="ref-code">"I like pizza"</span></dd>
+    <dt>Error</dt><dd>A message saying Python can’t follow a line of your code. It tells you which line to check.</dd>
+    <dt>Bug</dt><dd>A mistake in code. Fixing it is called debugging.</dd>
+    <dt>input()</dt><dd>Asks a question and waits for the user to type an answer.<span class="ref-code">input("What is your name? ")</span></dd>
+    <dt>Variable</dt><dd>A labelled box that stores information, like an answer, so you can use it later.<span class="ref-code">name = input("What is your name? ")</span></dd>
+    <dt>= (equals sign)</dt><dd>Stores something in a variable. Read it as “store this in.”<span class="ref-code">food = "tacos"</span></dd>
+    <dt>+ (plus sign)</dt><dd>Joins pieces of text into one message.<span class="ref-code">"Hi " + name</span></dd>
+    <dt>Comment</dt><dd>A note for people, starting with <code>#</code>. Python skips it.<span class="ref-code"># This line asks for a name</span></dd>
+    <dt>Chatbot</dt><dd>A program that talks with you by asking questions and replying.</dd>
+  </dl>
+</div>

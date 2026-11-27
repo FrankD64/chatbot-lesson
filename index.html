@@ -21,14 +21,12 @@
           <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="lesson1.html">Lesson 1</a></li>
           <li><a href="lesson2.html">Lesson 2</a></li>
-          <li><a href="decoder.html">Error Decoder</a></li>
-          <li><a href="words.html">Key Words</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="main" class="wrap">
+  <main id="main" class="wrap" style="max-width:1080px">
     <h1>Your First Chatbot</h1>
     <p class="lead">Two short lessons. One real program. By the end, you’ll build a chatbot in Python that asks questions and talks back.</p>
 
@@ -52,41 +50,80 @@
         <p>So what is coding? Coding means writing instructions for a computer. Computers are really fast, but they only do exactly what you tell them, in the exact order you tell them. Python is a language for writing those instructions, and it’s used for games, websites, science and much more.</p>
         <p>There are two lessons, and each one takes about 40 minutes. In Lesson 1, <em>Make the Computer Talk</em>, you’ll use <code>print()</code> to show messages on the screen. In Lesson 2, <em>Make the Computer Listen</em>, you’ll use <code>input()</code> and variables to ask questions and use the answers.</p>
         <p>Every lesson works the same way. First, a short slide deck explains the idea. Then you try the code in the Python box right on the page. There’s nothing to download and no account to make. Next, you fix some broken code. Finally, you make something of your own.</p>
-        <p>One more thing: you <em>will</em> see error messages. Everyone does, even professional programmers. An error doesn’t mean you’re bad at coding. It just means Python needs a small fix. If you get stuck, open the “Stuck?” hints or the Error Decoder page.</p>
-        <p>By the end, you’ll be able to write a <code>print()</code> line, use <code>input()</code> to save an answer in a variable, and build your own chatbot. Ready? Click Lesson 1 to get started.</p>
+        <p>You’ll probably run into some error messages along the way. Each one tells you which line to look at, and the Error Decoder beside each lesson explains what it means and how to fix it.</p>
+        <p>By the end, you’ll be able to write a <code>print()</code> line, use <code>input()</code> to save an answer in a variable, and build your own chatbot. Click Lesson 1 to get started.</p>
       </details>
     </section>
 
-    <section class="card" aria-labelledby="goals-h">
-      <h2 id="goals-h">By the end, you will be able to…</h2>
-      <div class="grid">
-        <div class="mini"><h3>1. Make it talk</h3><p>Write a <code>print()</code> line that shows a message, and fix one that has a mistake.</p></div>
-        <div class="mini"><h3>2. Make it listen</h3><p>Use <code>input()</code> to save an answer in a variable, then print it in a message.</p></div>
-        <div class="mini"><h3>3. Build a chatbot</h3><p>Make a short chatbot that asks two questions and uses both answers.</p></div>
+    <section aria-labelledby="lessons-h">
+      <h2 id="lessons-h" style="margin-top:40px">The lessons</h2>
+      <div class="lesson-cards">
+        <article class="lesson-card" aria-labelledby="l1-h">
+          <div class="preview" aria-hidden="true">print("Hello, world!")
+<span class="c"># Output</span>
+<span class="o">Hello, world!</span></div>
+          <div class="content">
+            <span class="eyebrow">Lesson 1</span>
+            <h2 id="l1-h">Make the Computer Talk</h2>
+            <p class="time">About 40 minutes</p>
+            <p>Write your first Python program and learn how to make the computer show any message you want.</p>
+            <h3>You’ll learn</h3>
+            <ul>
+              <li>What <code>print()</code> does</li>
+              <li>Why text needs quotes</li>
+              <li>How to find and fix the three most common mistakes</li>
+            </ul>
+            <h3>You’ll do</h3>
+            <ul>
+              <li><strong>Run It, Change It:</strong> print a three-line poster about yourself</li>
+              <li><strong>Bug Hunt:</strong> fix three broken programs</li>
+            </ul>
+            <a class="btn" href="lesson1.html">Start Lesson 1 →</a>
+          </div>
+        </article>
+
+        <article class="lesson-card" aria-labelledby="l2-h">
+          <div class="preview" aria-hidden="true">name = input("What is your name? ")
+print("Hi " + name + "!")
+<span class="c"># Output</span>
+<span class="o">What is your name? Sam
+Hi Sam!</span></div>
+          <div class="content">
+            <span class="eyebrow">Lesson 2</span>
+            <h2 id="l2-h">Make the Computer Listen</h2>
+            <p class="time">About 40 minutes</p>
+            <p>Make a program that asks questions, remembers the answers and uses them, then build your own chatbot.</p>
+            <h3>You’ll learn</h3>
+            <ul>
+              <li>How <code>input()</code> asks a question</li>
+              <li>How a variable stores an answer</li>
+              <li>How to join text and variables into one message</li>
+            </ul>
+            <h3>You’ll do</h3>
+            <ul>
+              <li><strong>Chatbot Builder:</strong> build a chatbot that asks two questions and uses both answers, then explain each line</li>
+            </ul>
+            <a class="btn" href="lesson2.html">Start Lesson 2 →</a>
+          </div>
+        </article>
       </div>
     </section>
 
     <section class="card" aria-labelledby="how-h">
       <h2 id="how-h">How each lesson works</h2>
       <ol class="tasks">
-        <li><strong>Learn it:</strong> go through a short slide deck. Use the arrow buttons, or “Show all slides” to read them all on one page.</li>
+        <li><strong>Learn it:</strong> go through a short slide deck.</li>
         <li><strong>Try it:</strong> run some code in the Python box on the page.</li>
         <li><strong>Fix it:</strong> find and fix mistakes in broken code.</li>
         <li><strong>Make it:</strong> write your own code, then explain what it does.</li>
       </ol>
-      <div class="callout tip">
-        <p><strong>Mistakes are normal.</strong> Python is picky, and one missing quote stops the whole program. That happens to everyone. Read the message, check the hint, and try again.</p>
-      </div>
+      <p>Beside each lesson, the <strong>Error Decoder</strong> explains error messages and <strong>Key Words</strong> defines every coding term. On a phone or small screen, open them with the button in the bottom corner.</p>
       <p class="small">You need a Chromebook, laptop or tablet with internet. Python runs inside your browser, so nothing you type is sent anywhere or saved.</p>
-      <div class="btn-row">
-        <a class="btn" href="lesson1.html">Start Lesson 1 →</a>
-        <a class="btn secondary" href="lesson2.html">Go to Lesson 2</a>
-      </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">Your First Chatbot · A Python micromodule for Grade 7 by Frank Deng · <a href="decoder.html">Error Decoder</a> · <a href="words.html">Key Words</a></div>
+    <div class="wrap">Your First Chatbot · A Python micromodule for Grade 7 by Frank Deng</div>
   </footer>
 </body>
 </html>
