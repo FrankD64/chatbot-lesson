@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 2: Make the Computer Listen · Your First Chatbot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">&gt;_</span> Your First Chatbot</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="lesson1.html">Lesson 1</a></li>
+          <li><a href="lesson2.html" aria-current="page">Lesson 2</a></li>
+          <li><a href="decoder.html">Error Decoder</a></li>
+          <li><a href="words.html">Key Words</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <h1>Lesson 2: Make the Computer Listen</h1>
+    <p class="lead">Use <code>input()</code> and variables to ask questions and use the answers. About 40 minutes.</p>
+
+    <nav aria-label="Lesson 2 steps">
+      <ol class="steps">
+        <li><a href="#warmup">Warm-up</a></li>
+        <li><a href="#learn">Learn it</a></li>
+        <li><a href="#build">Make it</a></li>
+        <li><a href="#wrap">Wrap up</a></li>
+      </ol>
+    </nav>
+
+    <!-- Step 1 -->
+    <section class="card" id="warmup" aria-labelledby="warmup-h">
+      <span class="step-label">Step 1 of 4 · 5 minutes</span>
+      <h2 id="warmup-h">Warm-up and key words</h2>
+      <p>Remember Lesson 1? Change this line so it says hi to <em>you</em>, then press Run.</p>
+      <div class="terminal" data-title="Warm-up" data-check="none">
+        <textarea>print("Hi, I'm ready for Lesson 2!")</textarea>
+      </div>
+      <p>Now learn two new words:</p>
+      <div class="grid">
+        <div class="mini"><h3>input()</h3><p>A Python instruction that asks a question and waits for the user to type an answer.</p></div>
+        <div class="mini"><h3>Variable</h3><p>A labelled box that stores information, like someone’s answer, so you can use it later.</p></div>
+      </div>
+      <a class="next-link" href="#learn">Next: Learn it ↓</a>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="card" id="learn" aria-labelledby="learn-h">
+      <span class="step-label">Step 2 of 4 · 10 minutes</span>
+      <h2 id="learn-h">Learn it: Make the Computer Listen</h2>
+      <p>Go through the slides with the <strong>Next</strong> button (or the arrow keys). Prefer to scroll? Press <strong>Show all slides</strong>.</p>
+
+      <div class="deck" data-title="Make the Computer Listen">
+        <div class="deck-viewport">
+          <div class="slide">
+            <h3>Make the Computer Listen</h3>
+            <p class="big">In Lesson 1, your programs only talked. Now you’ll make one that asks a question, remembers the answer and uses it.</p>
+          </div>
+          <div class="slide">
+            <h3>input() asks a question</h3>
+            <div class="slide-code"><span class="lbl">Code</span>input("What is your name? ")</div>
+            <p>When Python reaches this line, it shows the question and <strong>waits</strong> for you to type an answer and press Enter.</p>
+            <p>Leave a space before the last quote so the answer doesn’t touch the question.</p>
+          </div>
+          <div class="slide">
+            <h3>A variable is a labelled box</h3>
+            <div class="slide-code"><span class="lbl">Code</span>name = input("What is your name? ")</div>
+            <svg width="260" height="130" viewBox="0 0 260 130" role="img" aria-label="A box labelled name, with the answer Sam inside it">
+              <rect x="20" y="40" width="220" height="80" rx="10" fill="#EEF4FB" stroke="#0B5CAD" stroke-width="3"/>
+              <rect x="20" y="10" width="90" height="34" rx="8" fill="#0B5CAD"/>
+              <text x="65" y="33" text-anchor="middle" font-family="Atkinson Hyperlegible, Verdana, sans-serif" font-size="18" fill="#FFFFFF" font-weight="700">name</text>
+              <text x="130" y="90" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="24" fill="#1F2328">"Sam"</text>
+            </svg>
+            <p>The <code>=</code> means “put the answer in the box called <code>name</code>.” If you type Sam, the box holds <code>"Sam"</code>.</p>
+          </div>
+          <div class="slide">
+            <h3>Use the box in a message</h3>
+            <div class="slide-code"><span class="lbl">Code</span>name = input("What is your name? ")
+print("Hi " + name)</div>
+            <div class="slide-code"><span class="lbl">Output</span><span class="o">What is your name? Sam
+Hi Sam</span></div>
+            <p>The <code>+</code> joins pieces of text together into one message.</p>
+          </div>
+          <div class="slide">
+            <h3>No quotes around the box’s name</h3>
+            <div class="pair">
+              <div><span class="tag yes">✓ Prints the answer</span><div class="slide-code">print(name)</div><p>Shows what’s <strong>inside</strong> the box: <code>Sam</code></p></div>
+              <div><span class="tag no">✗ Prints the word</span><div class="slide-code">print("name")</div><p>Shows the word itself: <code>name</code></p></div>
+            </div>
+          </div>
+          <div class="slide">
+            <h3>Mind the space</h3>
+            <div class="pair">
+              <div><span class="tag no">✗ No space</span><div class="slide-code">print("Hi" + name)</div><p>Output: <code>HiSam</code></p></div>
+              <div><span class="tag yes">✓ Space inside the quotes</span><div class="slide-code">print("Hi " + name)</div><p>Output: <code>Hi Sam</code></p></div>
+            </div>
+            <p>Python only adds the spaces you type.</p>
+          </div>
+          <div class="slide">
+            <h3>Two questions, two boxes</h3>
+            <div class="slide-code"><span class="lbl">Code</span>name = input("What is your name? ")
+food = input("What is your favourite food? ")
+print("Hi " + name + "! I love " + food + " too!")</div>
+            <div class="slide-code"><span class="lbl">Output</span><span class="o">What is your name? Sam
+What is your favourite food? tacos
+Hi Sam! I love tacos too!</span></div>
+            <p>Each answer gets its own variable with its own name.</p>
+          </div>
+          <div class="slide">
+            <h3>Your turn</h3>
+            <p class="big">Scroll down to <strong>Make it</strong> and build your own chatbot. You choose what it talks about.</p>
+          </div>
+        </div>
+      </div>
+      <a class="next-link" href="#build">Next: Make it ↓</a>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="card" id="build" aria-labelledby="build-h">
+      <span class="step-label">Step 3 of 4 · 20 minutes · Activity 3</span>
+      <h2 id="build-h">Make it: Chatbot Builder</h2>
+      <p>Pick a topic for your chatbot: food, games, animals, sports, music, or your own idea.</p>
+      <ol class="tasks">
+        <li>Press <strong>▶ Run</strong>, type an answer in the box that appears, and press Enter.</li>
+        <li>Change the question to something else (for example, “What should I call you? ”).</li>
+        <li>Add a <strong>second question</strong> about your topic. Save the answer in a new variable, such as <code>game</code> or <code>animal</code>.</li>
+        <li>Change the <code>print()</code> line so your chatbot’s reply uses <strong>both</strong> answers.</li>
+        <li><strong>Explain your code.</strong> Above each line, add a comment that starts with <code>#</code> and says what the line does. Python skips comments, so they won’t break anything.</li>
+      </ol>
+      <div class="terminal" data-title="Activity 3: Chatbot Builder" data-check="chatbot">
+        <textarea># This line asks for the user's name and saves it in a variable called name
+name = input("What is your name? ")
+# This line prints a greeting that uses the name
+print("Hi " + name + "!")</textarea>
+      </div>
+      <details class="hint">
+        <summary>Stuck?</summary>
+        <p>Copy the pattern of the first <code>input()</code> line onto a new line, change the variable name and the question, then add your new variable into the <code>print()</code> line with <code>+</code>.</p>
+        <p>Seeing <code>HiSam</code>? Add a space inside the quotes. Seeing the word <code>name</code> instead of the answer? Take the quotes off the variable.</p>
+      </details>
+      <div class="callout info">
+        <p><strong>Prefer not to type your explanation?</strong> You can record your voice explaining each line, or take a screenshot and draw arrows to label each line.</p>
+      </div>
+      <a class="next-link" href="#wrap">Next: Wrap up ↓</a>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="card" id="wrap" aria-labelledby="wrap-h">
+      <span class="step-label">Step 4 of 4 · 5 minutes</span>
+      <h2 id="wrap-h">Wrap up</h2>
+      <ol class="tasks">
+        <li><strong>Test it on someone.</strong> Let a classmate or family member answer your chatbot’s questions.</li>
+        <li><strong>Share it if you want to.</strong> If your teacher has a class gallery, you can add your chatbot there. Sharing is optional.</li>
+      </ol>
+      <div class="callout warn">
+        <p><strong>Stay safe:</strong> don’t put personal information, like your full name, address or school, into a chatbot you share.</p>
+      </div>
+      <label class="q" for="reflect2">In your own words, what does a variable do?</label>
+      <textarea class="reflect" id="reflect2"></textarea>
+      <p class="small">This box isn’t saved. Write your answer here, or share it the way your teacher asks.</p>
+      <div class="callout info">
+        <p><strong>Hand it in:</strong> use <strong>Copy code</strong> or take a screenshot of your chatbot with its comments, and submit it with your explanation the way your teacher asks.</p>
+      </div>
+      <p><strong>You did it!</strong> You wrote a program that talks, listens and remembers. That’s the start of every chatbot, game and app.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">Your First Chatbot · A Python micromodule for Grade 7 by Frank Deng · <a href="decoder.html">Error Decoder</a> · <a href="words.html">Key Words</a></div>
+  </footer>
+</body>
+</html>

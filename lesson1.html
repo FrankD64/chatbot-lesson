@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 1: Make the Computer Talk · Your First Chatbot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">&gt;_</span> Your First Chatbot</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="lesson1.html" aria-current="page">Lesson 1</a></li>
+          <li><a href="lesson2.html">Lesson 2</a></li>
+          <li><a href="decoder.html">Error Decoder</a></li>
+          <li><a href="words.html">Key Words</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <h1>Lesson 1: Make the Computer Talk</h1>
+    <p class="lead">Use <code>print()</code> to make Python show messages on the screen. About 40 minutes.</p>
+
+    <nav aria-label="Lesson 1 steps">
+      <ol class="steps">
+        <li><a href="#words">Key words</a></li>
+        <li><a href="#learn">Learn it</a></li>
+        <li><a href="#try">Try it</a></li>
+        <li><a href="#fix">Fix it</a></li>
+        <li><a href="#wrap">Wrap up</a></li>
+      </ol>
+    </nav>
+
+    <!-- Step 1 -->
+    <section class="card" id="words" aria-labelledby="words-h">
+      <span class="step-label">Step 1 of 5 · 5 minutes</span>
+      <h2 id="words-h">Key words</h2>
+      <p>Haven’t watched the intro video yet? <a href="index.html">Start on the home page.</a> Then learn these three words.</p>
+      <div class="grid">
+        <div class="mini"><h3>Code</h3><p>Instructions written for a computer. The computer follows them in order, exactly as written.</p></div>
+        <div class="mini"><h3>print()</h3><p>A Python instruction that shows a message on the screen.</p></div>
+        <div class="mini"><h3>String</h3><p>Text inside quotes, like <code>"Hello"</code>. The quotes show where the text starts and ends.</p></div>
+      </div>
+      <p class="small">All the key words are on the <a href="words.html">Key Words</a> page.</p>
+      <a class="next-link" href="#learn">Next: Learn it ↓</a>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="card" id="learn" aria-labelledby="learn-h">
+      <span class="step-label">Step 2 of 5 · 10 minutes</span>
+      <h2 id="learn-h">Learn it: Make the Computer Talk</h2>
+      <p>Go through the slides with the <strong>Next</strong> button (or the arrow keys). Prefer to scroll? Press <strong>Show all slides</strong>.</p>
+
+      <div class="deck" data-title="Make the Computer Talk">
+        <div class="deck-viewport">
+          <div class="slide">
+            <h3>Make the Computer Talk</h3>
+            <p class="big">In these slides, you’ll learn how to make Python show a message on the screen.</p>
+            <p>You’ll also learn the three mistakes everyone makes at first, so you can fix them fast.</p>
+          </div>
+          <div class="slide">
+            <h3>Code is a list of instructions</h3>
+            <p>A computer follows instructions <strong>exactly</strong> and <strong>in order</strong>, from the top line to the bottom line.</p>
+            <p>It can’t guess what you meant. If an instruction has a mistake, the computer stops and tells you.</p>
+            <p>Python is one language for writing these instructions.</p>
+          </div>
+          <div class="slide">
+            <h3>Meet print()</h3>
+            <p><code>print()</code> shows whatever is inside the brackets.</p>
+            <div class="slide-code"><span class="lbl">Code</span>print("Hello, world!")</div>
+            <div class="slide-code"><span class="lbl">Output</span><span class="o">Hello, world!</span></div>
+            <p>“Hello, world!” is the traditional first program that coders write.</p>
+          </div>
+          <div class="slide">
+            <h3>Text needs quotes</h3>
+            <p>Text in quotes is called a <strong>string</strong>. The quotes tell Python where your message starts and ends.</p>
+            <div class="pair">
+              <div><span class="tag yes">✓ Works</span><div class="slide-code">print("I like pizza")</div></div>
+              <div><span class="tag no">✗ Error</span><div class="slide-code">print(I like pizza)</div></div>
+            </div>
+            <p>Without quotes, Python thinks <code>I like pizza</code> is an instruction, not a message.</p>
+          </div>
+          <div class="slide">
+            <h3>One print(), one line</h3>
+            <p>Each <code>print()</code> shows one line. Python runs them from top to bottom.</p>
+            <div class="slide-code"><span class="lbl">Code</span>print("My favourite food is sushi.")
+print("My favourite game is Minecraft.")
+print("My favourite animal is an otter.")</div>
+            <div class="slide-code"><span class="lbl">Output</span><span class="o">My favourite food is sushi.
+My favourite game is Minecraft.
+My favourite animal is an otter.</span></div>
+          </div>
+          <div class="slide">
+            <h3>The three most common mistakes</h3>
+            <div class="pair">
+              <div><span class="tag no">Missing quote</span><div class="slide-code">print("Hello)</div></div>
+              <div><span class="tag no">Missing bracket</span><div class="slide-code">print("Hello"</div></div>
+              <div><span class="tag no">Capital letter</span><div class="slide-code">Print("Hello")</div></div>
+            </div>
+            <p>One small mistake stops the whole program. That’s normal! The error message tells you which line to check.</p>
+          </div>
+          <div class="slide">
+            <h3>Your turn</h3>
+            <p class="big">Scroll down to <strong>Try it</strong>. You’ll run your first program and change it to say what you want.</p>
+            <p>Tip: type your code instead of copying it. Copying can paste “curly” quotes, which Python can’t read.</p>
+          </div>
+        </div>
+      </div>
+      <a class="next-link" href="#try">Next: Try it ↓</a>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="card" id="try" aria-labelledby="try-h">
+      <span class="step-label">Step 3 of 5 · 10 minutes · Activity 1</span>
+      <h2 id="try-h">Try it: Run It, Change It</h2>
+      <ol class="tasks">
+        <li>Press <strong>▶ Run</strong> and look at the output.</li>
+        <li>Change the message inside the quotes to anything you like. Run it again.</li>
+        <li>Make a <strong>three-line poster about you</strong>: add two more <code>print()</code> lines, for example your favourite food, game and animal.</li>
+      </ol>
+      <div class="terminal" data-title="Activity 1: Run It, Change It" data-check="lines3">
+        <textarea>print("Hello, world!")</textarea>
+      </div>
+      <details class="hint">
+        <summary>Stuck?</summary>
+        <p>Each line needs its own <code>print(</code>, a quote at the start of your text, a quote at the end, and a <code>)</code>. Copy the pattern of the first line and change the words.</p>
+      </details>
+      <a class="next-link" href="#fix">Next: Fix it ↓</a>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="card" id="fix" aria-labelledby="fix-h">
+      <span class="step-label">Step 4 of 5 · 10 minutes · Activity 2</span>
+      <h2 id="fix-h">Fix it: Bug Hunt</h2>
+      <p>Each program below has one bug (a mistake). Press <strong>Run</strong> to see the error, then fix the code until it works. Use the <a href="decoder.html">Error Decoder</a> if you need it.</p>
+
+      <h3>Bug 1</h3>
+      <div class="terminal" data-title="Bug 1" data-check="runs">
+        <textarea>print("Hello, world!)</textarea>
+      </div>
+      <details class="hint"><summary>Stuck on Bug 1?</summary><p>Look at the end of the text. Does it have a quote there too?</p></details>
+
+      <h3>Bug 2</h3>
+      <div class="terminal" data-title="Bug 2" data-check="runs">
+        <textarea>print("I like pizza"</textarea>
+      </div>
+      <details class="hint"><summary>Stuck on Bug 2?</summary><p>Count the brackets. Every <code>(</code> needs a matching <code>)</code>.</p></details>
+
+      <h3>Bug 3</h3>
+      <div class="terminal" data-title="Bug 3" data-check="runs">
+        <textarea>Print("Coding is fun!")</textarea>
+      </div>
+      <details class="hint"><summary>Stuck on Bug 3?</summary><p>Python cares about capital letters. Look at the very first letter.</p></details>
+      <a class="next-link" href="#wrap">Next: Wrap up ↓</a>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="card" id="wrap" aria-labelledby="wrap-h">
+      <span class="step-label">Step 5 of 5 · 5 minutes</span>
+      <h2 id="wrap-h">Wrap up</h2>
+      <label class="q" for="reflect1">Which bug was hardest to spot, and how did you fix it?</label>
+      <textarea class="reflect" id="reflect1"></textarea>
+      <p class="small">This box isn’t saved. Write your answer here, or share it the way your teacher asks.</p>
+      <div class="callout info">
+        <p><strong>Hand it in:</strong> take a screenshot of your three-line poster and your fixed bugs, or use <strong>Copy code</strong>, and submit them the way your teacher asks.</p>
+      </div>
+      <p><strong>Coming up in Lesson 2:</strong> so far, your programs only talk. Next, you’ll make the computer <em>listen</em> by asking questions and using the answers.</p>
+      <div class="btn-row"><a class="btn" href="lesson2.html">Go to Lesson 2 →</a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">Your First Chatbot · A Python micromodule for Grade 7 by Frank Deng · <a href="decoder.html">Error Decoder</a> · <a href="words.html">Key Words</a></div>
+  </footer>
+</body>
+</html>
