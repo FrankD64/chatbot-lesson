@@ -404,12 +404,171 @@
     frame.appendChild(f);
   }
 
+
+  /* ---------- Text to speech ---------- */
+  const synth = window.speechSynthesis;
+  let ttsToken = 0;
+  let ttsStopCb = null;
+
+  function ttsStop() {
+    ttsToken++;
+    if (synth) synth.cancel();
+    if (ttsStopCb) { const cb = ttsStopCb; ttsStopCb = null; cb(); }
+  }
+
+  // Split long text into sentence-sized pieces (Chrome cuts off very long utterances).
+  function ttsPieces(text) {
+    const out = [];
+    text.split(/(?<=[.!?])\s+(?=[A-Z0-9"“(])/).forEach(function (part) {
+      part = part.trim();
+      while (part.length > 220) {
+        let cut = part.lastIndexOf(" ", 220);
+        if (cut < 60) cut = 220;
+        out.push(part.slice(0, cut)); part = part.slice(cut).trim();
+      }
+      if (part) out.push(part);
+    });
+    return out;
+  }
+
+  // Speak a list of chunks in order. onDone runs when finished or stopped.
+  function ttsSpeak(chunks, onDone) {
+    ttsStop();
+    const token = ttsToken;
+    ttsStopCb = onDone;
+    const pieces = [];
+    chunks.forEach(function (c) { ttsPieces(c).forEach(function (p) { pieces.push(p); }); });
+    let i = 0;
+    function next() {
+      if (token !== ttsToken) return;
+      if (i >= pieces.length) { const cb = ttsStopCb; ttsStopCb = null; if (cb) cb(); return; }
+      const u = new SpeechSynthesisUtterance(pieces[i++]);
+      u.lang = "en-US";
+      u.rate = 0.95;
+      u.onend = next;
+      u.onerror = next;
+      synth.speak(u);
+    }
+    next();
+  }
+
+  const TTS_SKIP = "button, script, style, svg, .tts-btn, .slide-reader, .term-bar, .term-ask, .term-out-label, .slides-embed, .video-frame, .slides-links, [aria-hidden='true'], [data-tts-skip]";
+
+  // Turn a section into readable chunks: one per paragraph, heading, list item or code line.
+  function ttsCollect(root) {
+    const chunks = [];
+    let buf = "";
+    function flush() { const t = buf.replace(/\s+/g, " ").trim(); if (t) chunks.push(t); buf = ""; }
+    function visible(el) {
+      if (el.checkVisibility) return el.checkVisibility();
+      return el.offsetParent !== null || getComputedStyle(el).position === "fixed";
+    }
+    function walk(node) {
+      node.childNodes.forEach(function (n) {
+        if (n.nodeType === 3) { buf += n.textContent; return; }
+        if (n.nodeType !== 1 || n.matches(TTS_SKIP)) return;
+        if (n.tagName === "DETAILS" && !n.open) { flush(); const sm = n.querySelector("summary"); if (sm) chunks.push(sm.textContent.trim()); return; }
+        if (!visible(n)) return;
+        if (n.tagName === "TEXTAREA" || n.tagName === "INPUT") {
+          flush();
+          const label = n.classList.contains("term-code") ? "The code says: " : "";
+          const lines = n.value.split("\n").map(function (l) { return l.trim(); }).filter(Boolean);
+          if (lines.length) { chunks.push(label + lines[0]); lines.slice(1).forEach(function (l) { chunks.push(l); }); }
+          else if (n.classList.contains("reflect")) chunks.push("Empty answer box.");
+          return;
+        }
+        if (n.classList.contains("term-out")) {
+          flush();
+          const t = n.innerText.trim();
+          if (t) { chunks.push("Output:"); t.split("\n").forEach(function (l) { if (l.trim()) chunks.push(l.trim()); }); }
+          return;
+        }
+        const block = getComputedStyle(n).display.indexOf("inline") !== 0;
+        if (block) flush();
+        walk(n);
+        if (block) flush();
+      });
+    }
+    walk(root);
+    flush();
+    return chunks;
+  }
+
+  function ttsButton(target, label) {
+    const btn = el("button", "tts-btn", "");
+    btn.type = "button";
+    const name = label || "this section";
+    function idle() {
+      btn.innerHTML = '<span aria-hidden="true">🔊</span> Listen';
+      btn.setAttribute("aria-label", "Read " + name + " aloud");
+      btn.setAttribute("aria-pressed", "false");
+      target.classList.remove("tts-reading");
+    }
+    idle();
+    btn.addEventListener("click", function () {
+      if (btn.getAttribute("aria-pressed") === "true") { ttsStop(); return; }
+      const chunks = ttsCollect(target);
+      ttsSpeak(chunks, idle);
+      btn.innerHTML = '<span aria-hidden="true">■</span> Stop';
+      btn.setAttribute("aria-label", "Stop reading " + name);
+      btn.setAttribute("aria-pressed", "true");
+      target.classList.add("tts-reading");
+    });
+    return btn;
+  }
+
+  function setupTts() {
+    if (!synth || !window.SpeechSynthesisUtterance) return;
+    // Each big section gets a Listen button in its top-right corner.
+    document.querySelectorAll("main section.card, main section.intro, main .home-hero > .inner, main .band > .inner, main .lesson-card .content").forEach(function (sec) {
+      const h = sec.querySelector("h1, h2");
+      sec.insertBefore(ttsButton(sec, h ? h.textContent.trim() : ""), sec.firstChild);
+    });
+    document.querySelectorAll(".slide-script").forEach(setupSlideReader);
+    window.addEventListener("pagehide", ttsStop);
+  }
+
+  // Read the slides aloud one at a time, using the slide text list under the deck.
+  function setupSlideReader(list) {
+    const slides = Array.prototype.map.call(list.querySelectorAll("li"), function (li) { return li.textContent.trim(); });
+    if (!slides.length) return;
+    let cur = 0, playing = false;
+    const bar = el("div", "slide-reader");
+    bar.setAttribute("role", "group");
+    bar.setAttribute("aria-label", "Read the slides aloud");
+    const title = el("span", "slide-reader-title", "Listen to the slides:");
+    const prev = el("button", "btn secondary", "◀ Previous");
+    const play = el("button", "btn", "");
+    const next = el("button", "btn secondary", "Next ▶");
+    const status = el("span", "slide-reader-status", "");
+    status.setAttribute("aria-live", "polite");
+    [prev, play, next].forEach(function (b) { b.type = "button"; });
+    function render() {
+      play.innerHTML = playing ? '<span aria-hidden="true">■</span> Stop' : '<span aria-hidden="true">🔊</span> Read slide ' + (cur + 1);
+      status.textContent = "Slide " + (cur + 1) + " of " + slides.length;
+      prev.disabled = cur === 0;
+      next.disabled = cur === slides.length - 1;
+    }
+    function speak() {
+      playing = true; render();
+      ttsSpeak(["Slide " + (cur + 1) + ".", slides[cur]], function () { playing = false; render(); });
+    }
+    play.addEventListener("click", function () { if (playing) ttsStop(); else speak(); });
+    prev.addEventListener("click", function () { if (cur > 0) { cur--; speak(); } });
+    next.addEventListener("click", function () { if (cur < slides.length - 1) { cur++; speak(); } });
+    bar.append(title, prev, play, next, status);
+    const box = list.closest(".slide-script-box") || list;
+    box.parentNode.insertBefore(bar, box);
+    render();
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".terminal").forEach(setupTerminal);
     document.querySelectorAll(".slides-embed").forEach(setupSlides);
     const ref = document.getElementById("ref-panel");
     if (ref) setupReference(ref);
     document.querySelectorAll(".video-frame").forEach(setupVideo);
+    setupTts();
     // Start loading Python in the background on lesson pages, so Run is quick.
     if (document.querySelector(".terminal")) setTimeout(function () { loadPython().catch(function () {}); }, 800);
   });

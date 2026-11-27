@@ -185,6 +185,7 @@ textarea.reflect { width: 100%; min-height: 90px; font: inherit; padding: 10px 1
 
 /* ---------- Home page ---------- */
 .home-hero { padding: 64px var(--pad-x) 48px; border-bottom: 2px solid var(--rule); }
+.home-hero > .inner { max-width: 1100px; }
 .home-hero .lead { max-width: 760px; }
 .lesson-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); border-bottom: 2px solid var(--rule); }
 .lesson-card { display: flex; flex-direction: column; }
@@ -207,3 +208,16 @@ textarea.reflect { width: 100%; min-height: 90px; font: inherit; padding: 10px 1
   h1 { font-size: 1.9rem; }
   .lesson-card + .lesson-card { border-left: 0; border-top: 2px solid var(--rule); }
 }
+
+/* ---------- Text to speech ---------- */
+.tts-btn { float: right; margin: 0 0 12px 20px; font: inherit; font-size: .95rem; font-weight: 700; padding: 8px 14px; border: 2px solid var(--accent); border-radius: 0; background: var(--bg); color: var(--accent); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.tts-btn:hover { background: var(--accent-soft); }
+.tts-btn[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.intro > .tts-btn, .card > .tts-btn { max-width: none; }
+.tts-reading { box-shadow: inset 6px 0 0 var(--accent); }
+.slide-reader { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin: 12px 0; }
+.slide-reader-title { font-weight: 700; }
+.slide-reader .btn { padding: 8px 14px; }
+.slide-reader .btn:disabled { opacity: .45; cursor: default; }
+.slide-reader-status { color: var(--muted); }
+.slide-script li { margin-bottom: 8px; }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lesson 2: Make the Computer Listen · Your First Chatbot</title>
+  <title>Lesson 2: Making Computers Listen · Python for Beginners</title>
   <link rel="stylesheet" href="assets/style.css">
   <script src="assets/site.js" defer></script>
 </head>
@@ -23,8 +23,8 @@
   <div class="lesson-layout">
     <main id="main">
       <section class="intro">
-      <h1>Lesson 2: Make the Computer Listen</h1>
-      <p class="lead">Use <code>input()</code> and variables to ask questions and use the answers. About 40 minutes.</p>
+      <h1>Lesson 2: Making Computers Listen</h1>
+      <p class="lead">Use <code>input()</code> and variables to ask questions and use the answers. About 30 minutes.</p>
 
       <nav aria-label="Lesson 2 steps">
         <ol class="steps">
@@ -55,24 +55,37 @@
       <!-- Step 2 -->
       <section class="card" id="learn" aria-labelledby="learn-h">
         <span class="step-label">Step 2 of 4 · 10 minutes</span>
-        <h2 id="learn-h">Learn it: Make the Computer Listen</h2>
+        <h2 id="learn-h">Learn it: Making Computers Listen</h2>
         <p>Click through the slides with the arrows at the bottom of the deck.</p>
         <!-- TO ADD YOUR SLIDES: in Google Slides, choose File > Share > Publish to web > Embed, copy the link inside src="...", and paste it between the quotes in data-src below. -->
-        <div class="slides-embed" data-src="" data-title="Slides: Make the Computer Listen">
+        <div class="slides-embed" data-src="" data-title="Slides: Making Computers Listen">
           <div class="slides-placeholder">
             <div>
-              <p><strong>Slides: Make the Computer Listen</strong></p>
+              <p><strong>Slides: Making Computers Listen</strong></p>
               <p>The slides will appear here. For now, download them below.</p>
             </div>
           </div>
         </div>
-        <p class="slides-links"><a href="assets/slides/Lesson2_Make_the_Computer_Listen.pptx" download>Download the slides (PowerPoint)</a></p>
+        <p class="slides-links"><a href="assets/slides/Lesson2_Making_Computers_Listen.pptx" download>Download the slides (PowerPoint)</a></p>
+        <details class="hint transcript slide-script-box">
+          <summary>Read the slides as text</summary>
+          <ol class="slide-script">
+            <li>Making Computers Listen. Lesson 2: input and variables. In Lesson 1, your programs only talked. Now you'll make one that asks a question, remembers the answer and uses it.</li>
+            <li>input shows a question and waits for you to type an answer and press Enter. Leave a space before the closing quote, so the answer doesn't touch the question.</li>
+            <li>A variable is like a labelled box. This line asks for a name and stores the answer in a box labelled name. If you type Sam, the box holds Sam, and you can use it later.</li>
+            <li>The plus sign joins pieces of text. print Hi plus name shows Hi, followed by whatever is stored in the name box. If the answer was Sam, it shows Hi Sam.</li>
+            <li>Without quotes, print name shows what's inside the box, like Sam. With quotes around name, Python prints the word name itself.</li>
+            <li>Python only adds the spaces you type. Without a space inside the quotes, the output is HiSam. With a space after Hi, it's Hi Sam.</li>
+            <li>Each answer gets its own variable. This program asks for a name and a favourite food, stores them in name and food, then uses both in one message: Hi Sam! I love tacos too!</li>
+            <li>Your turn. Now scroll down to Make it and build your own chatbot. You choose what it talks about.</li>
+          </ol>
+        </details>
         <a class="next-link" href="#build">Next: Make it</a>
       </section>
 
       <!-- Step 3 -->
       <section class="card" id="build" aria-labelledby="build-h">
-        <span class="step-label">Step 3 of 4 · 20 minutes · Activity 3</span>
+        <span class="step-label">Step 3 of 4 · 10 minutes · Activity 3</span>
         <h2 id="build-h">Make it: Chatbot Builder</h2>
         <p>Pick a topic for your chatbot: food, games, animals, sports, music, or your own idea.</p>
         <ol class="tasks">
@@ -93,7 +106,7 @@ print("Hi " + name + "!")</textarea>
           <p>Copy the pattern of the first <code>input()</code> line onto a new line, change the variable name and the question, then add your new variable into the <code>print()</code> line with <code>+</code>.</p>
           <p>Seeing <code>HiSam</code>? Add a space inside the quotes. Seeing the word <code>name</code> instead of the answer? Take the quotes off the variable.</p>
         </details>
-        <p>You can also explain your code by recording your voice, or by taking a screenshot and drawing arrows to label each line.</p>
+        <p>You can also explain your code by recording your voice instead of writing comments.</p>
         <a class="next-link" href="#wrap">Next: Wrap up</a>
       </section>
 
@@ -102,12 +115,11 @@ print("Hi " + name + "!")</textarea>
         <span class="step-label">Step 4 of 4 · 5 minutes</span>
         <h2 id="wrap-h">Wrap up</h2>
         <ol class="tasks">
-          <li><strong>Test it on someone.</strong> Let a classmate or family member answer your chatbot’s questions.</li>
-          <li><strong>Share it if you want to.</strong> If your teacher has a class gallery, you can add your chatbot there. Don’t include personal information, like your full name, address or school.</li>
+          <li><strong>Test it on someone.</strong> Let a classmate or someone else answer your chatbot’s questions. If you share your chatbot, don’t put personal information in it, like your full name or address.</li>
         </ol>
-        <label class="q" for="reflect2">In your own words, what does a variable do?</label>
+        <label class="q" for="reflect2">In your own words, what is a variable?</label>
         <textarea class="reflect" id="reflect2"></textarea>
-        <p class="small">This box isn’t saved. Write your answer here, or share it the way your teacher asks.</p>
+        <p class="small">This box isn’t saved. Write your answer here, or record yourself saying it and submit the recording instead.</p>
         <p><strong>Hand it in:</strong> use <strong>Copy code</strong> or take a screenshot of your chatbot with its comments, and submit it with your explanation the way your teacher asks.</p>
       </section>
     </main>
