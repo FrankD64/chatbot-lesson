@@ -221,3 +221,6 @@ textarea.reflect { width: 100%; min-height: 90px; font: inherit; padding: 10px 1
 .slide-reader .btn:disabled { opacity: .45; cursor: default; }
 .slide-reader-status { color: var(--muted); }
 .slide-script li { margin-bottom: 8px; }
+.slides-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 0 0 10px; }
+.slides-fs { font-size: 1.05rem; }
+.slides-bar-tip { color: var(--muted); font-size: .95rem; }

@@ -293,12 +293,17 @@
     const links = box.nextElementSibling;
     if (links && links.classList.contains("slides-links")) {
       if (box.requestFullscreen || box.webkitRequestFullscreen) {
-        const fs = el("button", "btn secondary", "Full screen");
+        // A big, clear Full screen button in a bar right above the slides.
+        const bar = el("div", "slides-bar");
+        const fs = el("button", "btn slides-fs", "");
         fs.type = "button";
+        fs.innerHTML = '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg> View slides full screen';
         fs.addEventListener("click", function () {
           (box.requestFullscreen || box.webkitRequestFullscreen).call(box);
         });
-        links.insertBefore(fs, links.firstChild);
+        const tip = el("span", "slides-bar-tip", "Press Esc to exit full screen.");
+        bar.append(fs, tip);
+        box.parentNode.insertBefore(bar, box);
       }
       const a = el("a", null, "Open the slides in a new tab");
       a.href = src; a.target = "_blank"; a.rel = "noopener";
