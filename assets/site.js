@@ -307,7 +307,11 @@
       const a = el("a", null, "Open the slides in a new tab");
       a.href = src; a.target = "_blank"; a.rel = "noopener";
       links.insertBefore(a, links.firstChild);
-      if (fsBtn) links.insertBefore(fsBtn, links.firstChild);
+      if (fsBtn) {
+        const row = el("div", "slides-fs-row");
+        row.appendChild(fsBtn);
+        box.parentNode.insertBefore(row, links);
+      }
     }
   }
 
@@ -563,7 +567,9 @@
     next.addEventListener("click", function () { if (cur < slides.length - 1) { cur++; speak(); } });
     bar.append(title, prev, play, next, status);
     const box = list.closest(".slide-script-box") || list;
-    box.parentNode.insertBefore(bar, box);
+    // Sit right under the Full screen button, above the new-tab and download links.
+    const links = box.parentNode.querySelector(".slides-links");
+    box.parentNode.insertBefore(bar, links || box);
     render();
   }
 
