@@ -131,7 +131,7 @@ details.hint p { margin: 6px 0; }
 .video-placeholder, .slides-placeholder { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; color: var(--term-ink); padding: 24px; }
 .video-placeholder p, .slides-placeholder p { margin: 4px 0; }
 .play-icon { width: 60px; height: 60px; background: var(--accent); display: inline-grid; place-items: center; margin-bottom: 8px; }
-.slides-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; font-size: 1rem; margin: 0 0 8px; }
+.slides-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; font-size: 1rem; margin: 10px 0 8px; }
 .slides-embed:fullscreen { aspect-ratio: auto; width: 100vw; height: 100vh; margin: 0; }
 
 /* ---------- Reflection ---------- */
