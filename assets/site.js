@@ -247,10 +247,10 @@
         const asks = (src.match(/\binput\s*\(/g) || []).length;
         const lastPrint = outLines.length ? outLines[outLines.length - 1] : "";
         const used = answers.filter(function (a) { return a.trim() !== "" && printed.split(a).length > 1; }).length;
-        if (asks < 2) showResult(false, "Your chatbot asks " + asks + " question" + (asks === 1 ? "" : "s") + ". Add a second input() line.");
+        if (asks < 2) showResult(false, "Your chatbot asked " + asks + " question" + (asks === 1 ? "" : "s") + ". Add a second input() line.");
         else if (answers.some(function (a) { return a.trim() === ""; })) showResult(false, "Type an answer for every question when you test it.");
-        else if (used < answers.length) showResult(false, "Your reply doesn’t use every answer. Use + to add each variable to a print() line.");
-        else showResult(true, "Your chatbot asks " + asks + " questions and uses every answer. Last line: “" + lastPrint + "”");
+        else if (used < answers.length) showResult(false, "Your chatbot doesn’t use every answer. Use + to add each variable to a print() line.");
+        else showResult(true, "Your chatbot asks " + asks + " questions and uses every answer.");
       }
     }
 
@@ -354,7 +354,7 @@
 
   function setupReference(panel) {
     const body = panel.querySelector(".ref-body");
-    refReady = fetch("assets/reference.html?v=202611271705")
+    refReady = fetch("assets/reference.html?v=202611271722")
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
       .then(function (html) {
         body.innerHTML = html;
