@@ -229,3 +229,4 @@ textarea.reflect { width: 100%; min-height: 90px; font: inherit; padding: 10px 1
 .terminal:fullscreen { margin: 0; width: 100vw; height: 100vh; display: flex; flex-direction: column; overflow: auto; border: 0; }
 .terminal:fullscreen .term-code { flex: 1 1 auto; min-height: 40vh; resize: none; font-size: 1.4rem; }
 .terminal:fullscreen .term-out { font-size: 1.3rem; max-height: 35vh; overflow: auto; }
+.video-frame[data-youtube-id=""] { display: none; }
