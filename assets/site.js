@@ -151,7 +151,7 @@
     }
 
     function showResult(pass, text) {
-      result.textContent = (pass ? "✓ " : "Not yet: ") + text;
+      result.textContent = (pass ? "✓ " : "") + text;
       result.className = "term-check " + (pass ? "pass" : "notyet");
       result.hidden = false;
     }
@@ -228,7 +228,7 @@
         write((lineNo ? "Error on line " + lineNo + ":\n" : "Error:\n") + last + "\n", "e");
         const h = friendlyHelp(last);
         showHelp(h.text, h.anchor);
-        if (check !== "none") showResult(false, "fix the error, then press Run again.");
+        if (check !== "none") showResult(false, "Your program has an error, fix the error, then press Run again.");
         return;
       }
 
@@ -239,18 +239,18 @@
       const outLines = printed.split("\n").filter(function (l) { return l.trim() !== ""; });
 
       if (check === "lines3") {
-        if (outLines.length >= 3) showResult(true, "Nice! Your poster prints " + outLines.length + " lines.");
-        else showResult(false, "your program printed " + outLines.length + " line" + (outLines.length === 1 ? "" : "s") + ". Add more print() lines to make 3.");
+        if (outLines.length >= 3) showResult(true, "Good job! Your program prints " + outLines.length + " lines.");
+        else showResult(false, "Your program printed " + outLines.length + " line" + (outLines.length === 1 ? "" : "s") + ". Add more print() lines to make 3 lines.");
       } else if (check === "runs") {
-        if (hadOutput) showResult(true, "Fixed! It runs with no errors.");
-        else showResult(false, "it runs, but nothing printed. Make sure the print() line is still there.");
+        if (hadOutput) showResult(true, "Good job! Your program runs with no errors.");
+        else showResult(false, "Nothing printed. Make sure the print() line is still there.");
       } else if (check === "chatbot") {
         const asks = (src.match(/\binput\s*\(/g) || []).length;
         const lastPrint = outLines.length ? outLines[outLines.length - 1] : "";
         const used = answers.filter(function (a) { return a.trim() !== "" && printed.split(a).length > 1; }).length;
-        if (asks < 2) showResult(false, "your chatbot asks " + asks + " question" + (asks === 1 ? "" : "s") + ". Add a second input() line.");
-        else if (answers.some(function (a) { return a.trim() === ""; })) showResult(false, "type an answer for every question when you test it.");
-        else if (used < answers.length) showResult(false, "your reply doesn’t use every answer. Use + to add each variable to a print() line.");
+        if (asks < 2) showResult(false, "Your chatbot asks " + asks + " question" + (asks === 1 ? "" : "s") + ". Add a second input() line.");
+        else if (answers.some(function (a) { return a.trim() === ""; })) showResult(false, "Type an answer for every question when you test it.");
+        else if (used < answers.length) showResult(false, "Your reply doesn’t use every answer. Use + to add each variable to a print() line.");
         else showResult(true, "Your chatbot asks " + asks + " questions and uses every answer. Last line: “" + lastPrint + "”");
       }
     }
@@ -355,7 +355,7 @@
 
   function setupReference(panel) {
     const body = panel.querySelector(".ref-body");
-    refReady = fetch("assets/reference.html?v=202611271649")
+    refReady = fetch("assets/reference.html?v=202611271700")
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
       .then(function (html) {
         body.innerHTML = html;
