@@ -372,7 +372,7 @@
 
   function setupReference(panel) {
     const body = panel.querySelector(".ref-body");
-    refReady = fetch("assets/reference.html?v=202611271853")
+    refReady = fetch("assets/reference.html?v=202611271905")
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
       .then(function (html) {
         body.innerHTML = html;
@@ -593,6 +593,8 @@
     const ref = document.getElementById("ref-panel");
     if (ref) setupReference(ref);
     document.querySelectorAll(".video-frame").forEach(setupVideo);
+    const gl = document.getElementById("gallery-link");
+    if (gl && gl.getAttribute("href")) gl.parentNode.hidden = false;
     setupTts();
     // Start loading Python in the background on lesson pages, so Run is quick.
     if (document.querySelector(".terminal")) setTimeout(function () { loadPython().catch(function () {}); }, 800);

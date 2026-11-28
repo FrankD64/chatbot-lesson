@@ -45,3 +45,7 @@ The sidebar then shows your Google Docs, and any edits you make there appear on 
 1. Upload the video to YouTube (Unlisted is fine) and add corrected captions.
 2. Copy the video ID: for `https://www.youtube.com/watch?v=abc123XYZ`, the ID is `abc123XYZ`.
 3. In `index.html`, paste the ID between the quotes in `data-youtube-id=""`, then commit.
+
+## Linking the Chatbot Gallery
+
+In `lesson2.html`, put the Brightspace discussion link between the quotes in `href=""` on `id="gallery-link"`. The "Open the Chatbot Gallery on Brightspace" button appears once a link is added.
