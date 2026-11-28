@@ -232,7 +232,6 @@
         return;
       }
 
-      if (!hadOutput) write("(Your code ran, but it didn’t print anything. Did you use print()?)", "m");
 
       const printed = printedText;
       window.__lastAnswers = answers.slice();
