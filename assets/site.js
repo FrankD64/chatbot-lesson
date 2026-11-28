@@ -90,6 +90,23 @@
     const copyBtn = el("button", "btn secondary", "Copy code");
     copyBtn.type = "button";
     btns.append(runBtn, resetBtn, copyBtn);
+    if (box.requestFullscreen || box.webkitRequestFullscreen) {
+      const fsBtn = el("button", "btn secondary term-fs", "Full screen");
+      fsBtn.type = "button";
+      fsBtn.addEventListener("click", function () {
+        const cur = document.fullscreenElement || document.webkitFullscreenElement;
+        if (cur === box) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        else (box.requestFullscreen || box.webkitRequestFullscreen).call(box);
+      });
+      const sync = function () {
+        const on = (document.fullscreenElement || document.webkitFullscreenElement) === box;
+        fsBtn.textContent = on ? "Exit full screen" : "Full screen";
+        if (on) code.focus();
+      };
+      document.addEventListener("fullscreenchange", sync);
+      document.addEventListener("webkitfullscreenchange", sync);
+      btns.appendChild(fsBtn);
+    }
     bar.appendChild(btns);
 
     const outLabel = el("div", "term-out-label", "Output");
@@ -338,6 +355,7 @@
     else if (toggle && mobile.matches) toggle.focus();
   }
   function openReference(tab, anchor) {
+    if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
     refReady.then(function () {
       setTab(tab);
       if (mobile.matches) setOpen(true);
@@ -354,7 +372,7 @@
 
   function setupReference(panel) {
     const body = panel.querySelector(".ref-body");
-    refReady = fetch("assets/reference.html?v=202611271726")
+    refReady = fetch("assets/reference.html?v=202611271744")
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
       .then(function (html) {
         body.innerHTML = html;
