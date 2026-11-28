@@ -372,7 +372,7 @@
 
   function setupReference(panel) {
     const body = panel.querySelector(".ref-body");
-    refReady = fetch("assets/reference.html?v=202611271752")
+    refReady = fetch("assets/reference.html?v=202611271850")
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
       .then(function (html) {
         body.innerHTML = html;
